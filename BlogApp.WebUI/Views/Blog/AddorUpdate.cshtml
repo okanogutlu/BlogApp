@@ -1,0 +1,52 @@
+﻿@model BlogApp.Entity.Blog
+@{
+    ViewData["Title"] = "AddorUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";//admin ve kullanıcı diye ikiye ayırdık.
+}
+}
+
+<div class="container">
+    <form asp-controller="Blog" asp-action="AddorUpdate" method="post" enctype="multipart/form-data">
+        <!-- enctype file yüklemek için. Olmazsa sorun çıkar.-->
+        <input type="hidden" asp-for="ID" /><!--ID primary olduğundan dolayı edit işlemlerinde sorun çıkartıyor. Bu yüzden eklendi.-->
+        <input type="hidden" asp-for="Image" /> <!-- Eğer ki edit işleminde tekrar image yüklenmezse varolan image siliniyor. Bu yüzden eklendi.-->
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Body"></label>
+            <textarea asp-for="Body" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <img src="~/img/@Model.Image" width="120" />
+            <input type="file" name="file" id="file" class="form-control"> <!-- dosya yükleme alanı-->
+        </div>
+
+        <div class="form-group form-check">
+            <input asp-for="isApproved" type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">isApproved</label>
+        </div>
+
+        <div class="form-group form-check">
+            <input asp-for="isHome" type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">isHome</label>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CategoryID"></label>
+            <select asp-for="CategoryID" asp-items="ViewBag.Categories" class="form-control">
+                <option disabled selected>Select Category</option>
+
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

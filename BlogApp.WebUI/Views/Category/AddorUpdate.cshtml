@@ -1,0 +1,17 @@
+﻿@model BlogApp.Entity.Category
+@{
+    ViewData["Title"] = "AddorUpdate";
+}
+
+<div class="container">
+    <form asp-controller="Category" asp-action="AddorUpdate" method="post">
+        <input class="hidden" asp-for="ID" />
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
